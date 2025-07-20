@@ -1,73 +1,46 @@
-# Welcome to your Lovable project
+# 🚀 Nebula Nexus: Real-Time Space Mission Dashboard
 
-## Project info
+An immersive, web-based dashboard that visualizes real-time space mission data using NASA APIs. Built with pure HTML, CSS, and JavaScript, this project offers a futuristic user experience inspired by mission control centers—delivering live data on the International Space Station (ISS), Mars weather, asteroid tracking, and more.
 
-**URL**: https://lovable.dev/projects/f18c41b3-00f0-4987-b959-e4627a333af5
+---
 
-## How can I edit this code?
+## 🌌 Live Demo
 
-There are several ways of editing your application.
+**[👉 View Live Project](#)** *(Replace with your live URL if deployed)*
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f18c41b3-00f0-4987-b959-e4627a333af5) and start prompting.
+## ✨ Features
 
-Changes made via Lovable will be committed automatically to this repo.
+- 🌍 **ISS Tracker**: Displays the real-time location of the International Space Station.
+- 🔴 **Mars Weather Module**: Fetches recent weather data from NASA’s InSight lander.
+- ☄️ **Asteroid Alerts**: Shows near-Earth object data from NASA’s NEO API.
+- 🌠 **Astronomy Picture of the Day (APOD)**: Daily cosmic image with description.
+- 🧊 **Glassmorphism UI**: Cosmic-themed, modern dashboard with animated data cards.
+- 🌓 **Dark Mode + Cosmic Vibes**: Designed for an immersive stargazing experience.
+- 📱 **Responsive Design**: Fully functional across desktop, tablet, and mobile devices.
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🛠️ Technologies Used
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **HTML5** – Semantic structure for UI components  
+- **CSS3** – Styling, layout, animations, responsive design  
+- **JavaScript (Vanilla)** – Logic, API calls, and interactivity  
+- **NASA Open APIs**  
+  - APOD API (`https://api.nasa.gov/planetary/apod`)
+  - ISS Tracker (`http://api.open-notify.org/iss-now.json`)
+  - Mars Weather (`https://api.nasa.gov/insight_weather/?api_key=YOUR_KEY&feedtype=json`)
+  - Asteroid NEO Feed (`https://api.nasa.gov/neo/rest/v1/feed`)  
+- **Fetch API** – For making asynchronous API requests
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## 🙏 Acknowledgements
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+I would like to extend my heartfelt thanks to the **Organizers of Nebula Nexus: Code the Cosmos** for providing this incredible platform to innovate, collaborate, and showcase creativity in front-end development under a cosmic theme.
 
-# Step 3: Install the necessary dependencies.
-npm i
+Special thanks to **Lovable AI**, whose assistance in generating visually stunning UI/UX components, layout ideas, and content structure significantly boosted the quality and execution of this project.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+This experience has been both inspiring and educational, and I’m grateful for the opportunity to build something truly out of this world.
 
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/f18c41b3-00f0-4987-b959-e4627a333af5) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
