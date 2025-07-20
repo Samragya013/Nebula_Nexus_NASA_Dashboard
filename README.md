@@ -6,7 +6,7 @@ An immersive, web-based dashboard that visualizes real-time space mission data u
 
 ## 🌌 Live Demo
 
-**[👉 https://void-voyager-dashboard.lovable.app](#)** *(Replace with your live URL if deployed)*
+**[👉 https://void-voyager-dashboard.lovable.app](#)** 
 
 ---
 
