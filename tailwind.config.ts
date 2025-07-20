@@ -61,6 +61,21 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// NASA Mission Dashboard custom colors
+				cosmic: {
+					purple: 'hsl(var(--cosmic-purple))',
+					cyan: 'hsl(var(--cosmic-cyan))',
+					orange: 'hsl(var(--cosmic-orange))'
+				},
+				space: {
+					gray: 'hsl(var(--space-gray))',
+					deep: 'hsl(var(--deep-space))'
+				},
+				mission: {
+					success: 'hsl(var(--mission-success))',
+					warning: 'hsl(var(--mission-warning))',
+					critical: 'hsl(var(--mission-critical))'
 				}
 			},
 			borderRadius: {
