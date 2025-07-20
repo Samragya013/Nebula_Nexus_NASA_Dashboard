@@ -4,21 +4,36 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AlertTriangle, Zap, Calendar, Ruler, Target } from 'lucide-react';
 
+interface CloseApproachData {
+  close_approach_date: string;
+  close_approach_date_full: string;
+  epoch_date_close_approach: number;
+  relative_velocity: {
+    kilometers_per_second: string;
+    kilometers_per_hour: string;
+    miles_per_hour: string;
+  };
+  miss_distance: {
+    astronomical: string;
+    lunar: string;
+    kilometers: string;
+    miles: string;
+  };
+  orbiting_body: string;
+}
+
 interface Asteroid {
   id: string;
   name: string;
-  diameter: {
-    min: number;
-    max: number;
+  estimated_diameter: {
+    meters: {
+      estimated_diameter_min: number;
+      estimated_diameter_max: number;
+    };
   };
-  is_potentially_hazardous: boolean;
-  close_approach_date: string;
-  miss_distance: {
-    kilometers: string;
-    lunar: string;
-  };
-  velocity: string;
-  magnitude: number;
+  is_potentially_hazardous_asteroid: boolean;
+  close_approach_data: CloseApproachData[];
+  absolute_magnitude_h: number;
 }
 
 interface AsteroidFeedData {
@@ -68,13 +83,15 @@ export const AsteroidsPanel: React.FC = () => {
       allAsteroids.push(...dayAsteroids);
     });
     
-    return allAsteroids.sort((a, b) => 
-      parseFloat(a.miss_distance.kilometers) - parseFloat(b.miss_distance.kilometers)
-    );
+    return allAsteroids.sort((a, b) => {
+      const aDistance = parseFloat(a.close_approach_data[0]?.miss_distance?.kilometers || '0');
+      const bDistance = parseFloat(b.close_approach_data[0]?.miss_distance?.kilometers || '0');
+      return aDistance - bDistance;
+    });
   };
 
   const getHazardousAsteroids = (): Asteroid[] => {
-    return getAllAsteroids().filter(asteroid => asteroid.is_potentially_hazardous);
+    return getAllAsteroids().filter(asteroid => asteroid.is_potentially_hazardous_asteroid);
   };
 
   const formatDistance = (km: string): string => {
@@ -85,7 +102,9 @@ export const AsteroidsPanel: React.FC = () => {
     return `${distance.toLocaleString()} km`;
   };
 
-  const formatDiameter = (min: number, max: number): string => {
+  const formatDiameter = (asteroid: Asteroid): string => {
+    const min = asteroid.estimated_diameter.meters.estimated_diameter_min;
+    const max = asteroid.estimated_diameter.meters.estimated_diameter_max;
     return `${min.toFixed(0)}-${max.toFixed(0)}m`;
   };
 
@@ -160,8 +179,8 @@ export const AsteroidsPanel: React.FC = () => {
               <div>
                 <p className="text-2xl font-bold text-cosmic-cyan">
                   {allAsteroids.length > 0 
-                    ? formatDistance(allAsteroids[0].miss_distance.kilometers)
-                    : 'N/A'
+                  ? formatDistance(allAsteroids[0].close_approach_data[0]?.miss_distance?.kilometers || '0')
+                  : 'N/A'
                   }
                 </p>
                 <p className="text-xs text-muted-foreground">Closest Approach</p>
@@ -204,7 +223,7 @@ export const AsteroidsPanel: React.FC = () => {
                     <div className="font-medium text-sm truncate flex-1">
                       {asteroid.name}
                     </div>
-                    {asteroid.is_potentially_hazardous && (
+                    {asteroid.is_potentially_hazardous_asteroid && (
                       <AlertTriangle className="w-4 h-4 text-mission-critical flex-shrink-0 ml-2" />
                     )}
                   </div>
@@ -213,19 +232,19 @@ export const AsteroidsPanel: React.FC = () => {
                     <div>
                       <span className="font-medium">Distance:</span>
                       <div className="text-cosmic-cyan">
-                        {formatDistance(asteroid.miss_distance.kilometers)}
+                        {formatDistance(asteroid.close_approach_data[0]?.miss_distance?.kilometers || '0')}
                       </div>
                     </div>
                     <div>
                       <span className="font-medium">Diameter:</span>
                       <div className="text-accent">
-                        {formatDiameter(asteroid.diameter.min, asteroid.diameter.max)}
+                        {formatDiameter(asteroid)}
                       </div>
                     </div>
                   </div>
                   
                   <div className="text-xs text-muted-foreground">
-                    <span className="font-medium">Velocity:</span> {parseFloat(asteroid.velocity).toFixed(0)} km/h
+                    <span className="font-medium">Velocity:</span> {parseFloat(asteroid.close_approach_data[0]?.relative_velocity?.kilometers_per_hour || '0').toFixed(0)} km/h
                   </div>
                 </div>
               ))}
@@ -262,19 +281,19 @@ export const AsteroidsPanel: React.FC = () => {
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Miss Distance:</span>
                       <span className="text-mission-critical font-medium">
-                        {formatDistance(asteroid.miss_distance.kilometers)}
+                        {formatDistance(asteroid.close_approach_data[0]?.miss_distance?.kilometers || '0')}
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Lunar Distance:</span>
                       <span className="text-accent">
-                        {parseFloat(asteroid.miss_distance.lunar).toFixed(2)} LD
+                        {parseFloat(asteroid.close_approach_data[0]?.miss_distance?.lunar || '0').toFixed(2)} LD
                       </span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Diameter:</span>
                       <span className="text-cosmic-orange">
-                        {formatDiameter(asteroid.diameter.min, asteroid.diameter.max)}
+                        {formatDiameter(asteroid)}
                       </span>
                     </div>
                   </div>
